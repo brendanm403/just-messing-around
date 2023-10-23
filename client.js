@@ -1,5 +1,11 @@
+const numberFormatter = Intl.NumberFormat('en-US');
 // player coins //
-let coins = 0;
+if (!localStorage.getItem("coins")) {
+  localStorage.setItem("coins", 0);
+};
+
+let coins = localStorage.getItem("coins");
+
 
 // plays a sound when currency item is clicked //
 const clickSound = function() {
@@ -52,7 +58,7 @@ const currencyArr = [bigNugget, bigPearl, nugget, starPiece, pearl, blueShard, g
 
 // renders the players coins on screen //
 const displayCoins = function() {
-  document.getElementById("player-coins").innerHTML = coins;
+  document.getElementById("player-coins").innerHTML = numberFormatter.format(coins);
 }
 
 // selects if an item will stock based on rarity //
@@ -105,7 +111,9 @@ const createImg = function(arrItem) {
   document.querySelector(".currency-grid").appendChild(renderItem);
   renderItem.addEventListener("click", function() {
     clickSound();
+    coins =  Number(localStorage.getItem("coins"));
     coins += arrItem.value;
+    localStorage.setItem("coins", coins);
     displayCoins();
     renderItem.remove();
   });
