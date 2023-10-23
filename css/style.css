@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  background-color: rgb(231, 105, 105);
+}
+
+.nugget {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+}
+
+.currency-item {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;  
+}
+
+.currency-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 40px);
+  gap: 3rem;
+  justify-content: center;
+  justify-items: center;
+  grid-auto-rows: minmax(35px, 40px);
+  margin-top: 5rem;
+}
+
+.left-side {
+  width: 500px;
+  height: 500px;
+  background-color: aliceblue;
+  margin-left: 6rem;
+  margin-top: 6rem;
+  border: 3px solid black;
+  border-radius: 1rem;
+}
+
+.disable-click {
+  pointer-events: none;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* .currency-grid {
+  display: grid;
+  grid-column-gap: 30px;
+  grid-row-gap: 10px;
+  grid-template-columns: repeat(8, 92px);
+  grid-auto-rows: minmax(180px, auto);
+  justify-content: center;
+  justify-items: center;
+} */
+
