@@ -139,12 +139,13 @@ const createImg = function(arrItem) {
   document.querySelector(".currency-grid").appendChild(renderItem);
   renderItem.addEventListener("click", function(event) {
     clickSound();
+    preventClickSpam();
     let paragraph = document.createElement("p");
     paragraph.setAttribute("id", "pop-up-value-text")
     let text = document.createTextNode(`+${arrItem.value}`);
     paragraph.appendChild(text);
     paragraph.style.position = "absolute";
-    paragraph.style.left = event.clientX - 15 + "px";
+    paragraph.style.left = event.clientX - 20 + "px";
     paragraph.style.top = event.clientY - 45 + "px";
     paragraph.style.margin = 0;
     paragraph.style.color = "green";
@@ -169,17 +170,20 @@ const resetCurrencyObject = function(arr) {
 
 // allows you to click on items in the currency grid by removing a class //
 const allowClick = function() {
-  const allowOn = document.querySelector(".left-side");
-  allowOn.classList.remove("disable-click")  
+  const allowOn = document.querySelectorAll(".currency-item");
+  allowOn.forEach(function(item) {
+    item.classList.remove("disable-click"); 
+  }) 
 }
 
 // prevents the player from spam clicking as many items as they can //
 const preventClickSpam = function() {
-  const preventOn = document.querySelector(".left-side");
-  preventOn.addEventListener("click", function() {
-    preventOn.classList.add("disable-click");
-    setTimeout(allowClick, 2000);
+  const preventOn = document.querySelectorAll(".currency-item");
+  console.log(preventOn);
+  preventOn.forEach(function(item) {
+    item.classList.add("disable-click");
   });
+  setTimeout(allowClick, 2100);
 }
 
 // creates the currency items that were selected by looping through the array //
@@ -228,6 +232,6 @@ const spawnItems = function() {
 //   document.body.appendChild(paragraph);
 // })
 
-preventClickSpam();
+
 displayCoins();
 setInterval(spawnItems, 3000);
