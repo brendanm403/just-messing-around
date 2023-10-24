@@ -169,6 +169,7 @@ const resetCurrencyObject = function(arr) {
 }
 
 // allows you to click on items in the currency grid by removing a class //
+// THIS FUNCTION IS NO LONGER NEEDED //
 const allowClick = function() {
   const allowOn = document.querySelectorAll(".currency-item");
   allowOn.forEach(function(item) {
@@ -179,11 +180,10 @@ const allowClick = function() {
 // prevents the player from spam clicking as many items as they can //
 const preventClickSpam = function() {
   const preventOn = document.querySelectorAll(".currency-item");
-  console.log(preventOn);
   preventOn.forEach(function(item) {
     item.classList.add("disable-click");
   });
-  setTimeout(allowClick, 2100);
+  // setTimeout(allowClick, 2100);
 }
 
 // creates the currency items that were selected by looping through the array //
