@@ -40,6 +40,7 @@ const starDust = new Currency("currency-item", 6, false, "images/star-dust.png",
 const moonStone = new Currency("currency-item", 5, false, "images/moon-stone.png", 400);
 const sunStone = new Currency("currency-item", 5, false, "images/sun-stone.png", 400);
 const dawnStone = new Currency("currency-item", 4, false, "images/dawn-stone.png", 300);
+
 const shinyStone = new Currency("currency-item", 4, false, "images/shiny-stone.png", 300);
 const duskStone = new Currency("currency-item", 4, false, "images/dusk-stone.png", 300);
 const waterStone = new Currency("currency-item", 3, false, "images/water-stone.png", 200);
@@ -51,8 +52,19 @@ const yellowShard = new Currency("currency-item", 2, false, "images/yellow-shard
 const blueShard = new Currency("currency-item", 1, false, "images/blue-shard.png", 10);
 const greenShard = new Currency("currency-item", 1, false, "images/green-shard.png", 10);
 
+const deepSeaScale = new Currency("currency-item", 3, false, "images/deep-sea-scale.png", 50);
+const dragonScale = new Currency("currency-item", 3, false, "images/dragon-scale.png", 50);
+const prismScale = new Currency("currency-item", 3, false, "images/prism-scale.png", 50);
+const everStone = new Currency("currency-item", 1, false, "images/everstone.png", 5);
+const eviolite = new Currency("currency-item", 2, false, "images/eviolite.png", 20);
+const floatStone = new Currency("currency-item", 1, false, "images/float-stone.png", 5);
+const hardStone = new Currency("currency-item", 1, false, "images/hard-stone.png", 5);
+const ironBall = new Currency("currency-item", 1, false, "images/iron-ball.png", 5);
+const lightClay = new Currency("currency-item", 2, false, "images/light-clay.png", 30);
+const ovalStone = new Currency("currency-item", 1, false, "images/oval-stone.png", 30);
+
 // creating array of these currency objects //
-const currencyArr = [bigNugget, bigPearl, nugget, starPiece, pearl, blueShard, greenShard, yellowShard, redShard, moonStone, leafStone, fireStone, thunderStone, waterStone, sunStone, rareCandy, starDust, duskStone, shinyStone, dawnStone];
+const currencyArr = [bigNugget, bigPearl, nugget, starPiece, pearl, blueShard, greenShard, yellowShard, redShard, moonStone, leafStone, fireStone, thunderStone, waterStone, sunStone, rareCandy, starDust, duskStone, shinyStone, dawnStone, deepSeaScale, dragonScale, everStone, eviolite, floatStone, hardStone, ironBall, lightClay, ovalStone, prismScale];
 
 // randomly orders the array //
 const shuffleArray = function(arr) {
@@ -127,7 +139,21 @@ const selectCurrencyItems = function(arr) {
   });
 }
 
-const removePopUp = function() {
+// displays the value with a text pop up when an item is clicked on //
+const displayItemValue = function(event, itemValue) {
+  let paragraph = document.createElement("p");
+  paragraph.setAttribute("id", "pop-up-value-text")
+  let text = document.createTextNode(`+${itemValue}`);
+  paragraph.appendChild(text);
+  paragraph.style.position = "absolute";
+  paragraph.style.left = event.clientX - 20 + "px";
+  paragraph.style.top = event.clientY - 45 + "px";
+  paragraph.style.margin = 0;
+  paragraph.style.color = "green";
+  document.body.appendChild(paragraph);
+}
+
+const removeItemValuePopUp = function() {
   document.getElementById("pop-up-value-text").remove();
 }
 
@@ -140,17 +166,8 @@ const createImg = function(arrItem) {
   renderItem.addEventListener("click", function(event) {
     clickSound();
     preventClickSpam();
-    let paragraph = document.createElement("p");
-    paragraph.setAttribute("id", "pop-up-value-text")
-    let text = document.createTextNode(`+${arrItem.value}`);
-    paragraph.appendChild(text);
-    paragraph.style.position = "absolute";
-    paragraph.style.left = event.clientX - 20 + "px";
-    paragraph.style.top = event.clientY - 45 + "px";
-    paragraph.style.margin = 0;
-    paragraph.style.color = "green";
-    document.body.appendChild(paragraph);
-    setTimeout(removePopUp, 400);
+    displayItemValue(event, arrItem.value);
+    setTimeout(removeItemValuePopUp, 400);
     coins =  Number(localStorage.getItem("coins"));
     coins += arrItem.value;
     localStorage.setItem("coins", coins);
@@ -234,4 +251,4 @@ const spawnItems = function() {
 
 
 displayCoins();
-setInterval(spawnItems, 3000);
+setInterval(spawnItems, randomRange(3000, 10000));
