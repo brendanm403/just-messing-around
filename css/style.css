@@ -5,6 +5,10 @@ body {
   font-size: 10px;
 }
 
+h4 {
+text-align: center;
+}
+
 .nugget {
   position: absolute;
   width: 70px;
@@ -20,8 +24,9 @@ body {
 
 .currency-grid {
   display: grid;
-  grid-template-columns: repeat(6, 40px);
-  gap: 2rem;
+  grid-template-columns: repeat(5, 40px);
+  column-gap: 3rem;
+  row-gap: 2.5rem;
   justify-content: center;
   justify-items: center;
   grid-auto-rows: minmax(35px, 40px);
