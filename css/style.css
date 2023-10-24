@@ -7,6 +7,12 @@ body {
 
 h4 {
 text-align: center;
+margin: 1.5rem auto 0 auto;
+background-color: black;
+border-radius: 1rem;
+width: fit-content;
+color: white;
+padding: .5rem;
 }
 
 .nugget {
@@ -30,12 +36,12 @@ text-align: center;
   justify-content: center;
   justify-items: center;
   grid-auto-rows: minmax(35px, 40px);
-  margin-top: 4rem;
+  margin-top: 3rem;
 }
 
 .left-side {
   width: 500px;
-  height: 500px;
+  height: 600px;
   background-color: aliceblue;
   margin-left: 6rem;
   margin-top: 6rem;

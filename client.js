@@ -63,8 +63,15 @@ const ironBall = new Currency("currency-item", 1, false, "images/iron-ball.png",
 const lightClay = new Currency("currency-item", 2, false, "images/light-clay.png", 30);
 const ovalStone = new Currency("currency-item", 1, false, "images/oval-stone.png", 30);
 
+const relicCopper = new Currency("currency-item", 2, false, "images/relic-copper.png", 20);
+const relicSilver = new Currency("currency-item", 1, false, "images/relic-silver.png", 5);
+const relicGold = new Currency("currency-item", 1, false, "images/relic-gold.png", 5);
+const darkStone = new Currency("currency-item", 1, false, "images/dark-stone.png", 5);
+const lightStone = new Currency("currency-item", 2, false, "images/light-stone.png", 30);
+
+
 // creating array of these currency objects //
-const currencyArr = [bigNugget, bigPearl, nugget, starPiece, pearl, blueShard, greenShard, yellowShard, redShard, moonStone, leafStone, fireStone, thunderStone, waterStone, sunStone, rareCandy, starDust, duskStone, shinyStone, dawnStone, deepSeaScale, dragonScale, everStone, eviolite, floatStone, hardStone, ironBall, lightClay, ovalStone, prismScale];
+const currencyArr = [bigNugget, bigPearl, nugget, starPiece, pearl, blueShard, greenShard, yellowShard, redShard, moonStone, leafStone, fireStone, thunderStone, waterStone, sunStone, rareCandy, starDust, duskStone, shinyStone, dawnStone, deepSeaScale, dragonScale, everStone, eviolite, floatStone, hardStone, ironBall, lightClay, ovalStone, prismScale, relicCopper, relicSilver, relicGold, darkStone, lightStone];
 
 // randomly orders the array //
 const shuffleArray = function(arr) {
