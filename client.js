@@ -27,8 +27,6 @@ function Currency(commonClass, rarity, selected, source, value) {
   this.selected = selected;
   this.source = source;
   this.value = value;
-  // this.xPos = xPos;
-  // this.yPos = yPos;
 };
 
 // making all the objects //
@@ -56,6 +54,17 @@ const greenShard = new Currency("currency-item", 1, false, "images/green-shard.p
 // creating array of these currency objects //
 const currencyArr = [bigNugget, bigPearl, nugget, starPiece, pearl, blueShard, greenShard, yellowShard, redShard, moonStone, leafStone, fireStone, thunderStone, waterStone, sunStone, rareCandy, starDust, duskStone, shinyStone, dawnStone];
 
+// randomly orders the array //
+const shuffleArray = function(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+  }
+  // return arr;
+}
+
 // renders the players coins on screen //
 const displayCoins = function() {
   document.getElementById("player-coins").innerHTML = numberFormatter.format(coins);
@@ -66,41 +75,60 @@ const selectCurrencyItems = function(arr) {
   arr.forEach(function(item) {
     if (item.rarity === 10) {
       let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 100) {
+      if (randNum === 1) {
         item.selected = true;
       } 
     } else if (item.rarity === 9) {
       let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 100) {
+      if (randNum <= 2) {
         item.selected = true;
       } 
+    } else if (item.rarity === 8) {
+      let randNum = Math.ceil(Math.random()*100);
+      if (randNum <= 3) {
+        item.selected = true;
+      } 
+    } else if (item.rarity === 7) {
+      let randNum = Math.ceil(Math.random()*100);
+      if (randNum <= 4) {
+        item.selected = true;
+      }
+    } else if (item.rarity === 6) {
+      let randNum = Math.ceil(Math.random()*100);
+      if (randNum <= 5) {
+        item.selected = true;
+      }
     } else if (item.rarity === 5) {
       let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 100) {
+      if (randNum <= 6) {
         item.selected = true;
-      } 
+      }
     } else if (item.rarity === 4) {
       let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 100) {
+      if (randNum <= 7) {
         item.selected = true;
       }
     } else if (item.rarity === 3) {
       let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 100) {
+      if (randNum <= 8) {
         item.selected = true;
       }
     } else if (item.rarity === 2) {
       let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 100) {
+      if (randNum <= 80) {
         item.selected = true;
       }
     } else if (item.rarity === 1) {
       let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 100) {
+      if (randNum <= 90) {
         item.selected = true;
       }
     }
   });
+}
+
+const removePopUp = function() {
+  document.getElementById("pop-up-value-text").remove();
 }
 
 // creates an image element, sets attributes, renders on screen, adds event listener //
@@ -109,8 +137,19 @@ const createImg = function(arrItem) {
   renderItem.classList.add(arrItem.commonClass);
   renderItem.src = arrItem.source;
   document.querySelector(".currency-grid").appendChild(renderItem);
-  renderItem.addEventListener("click", function() {
+  renderItem.addEventListener("click", function(event) {
     clickSound();
+    let paragraph = document.createElement("p");
+    paragraph.setAttribute("id", "pop-up-value-text")
+    let text = document.createTextNode(`+${arrItem.value}`);
+    paragraph.appendChild(text);
+    paragraph.style.position = "absolute";
+    paragraph.style.left = event.clientX - 15 + "px";
+    paragraph.style.top = event.clientY - 45 + "px";
+    paragraph.style.margin = 0;
+    paragraph.style.color = "green";
+    document.body.appendChild(paragraph);
+    setTimeout(removePopUp, 400);
     coins =  Number(localStorage.getItem("coins"));
     coins += arrItem.value;
     localStorage.setItem("coins", coins);
@@ -168,11 +207,26 @@ const deleteCurrencyItem = function() {
 
 // main function to pass into setInterval to control everything //
 const spawnItems = function() {
+  shuffleArray(currencyArr);
   selectCurrencyItems(currencyArr);
   createCurrencyItem(currencyArr);
   resetCurrencyObject(currencyArr);
   setTimeout(deleteCurrencyItem, 2000);
 }
+
+
+//**************** All of this has been put in the event listener on the images in the create image function */
+// document.querySelector(".left-side").addEventListener("click", function(event) {
+//   console.log(event.clientX, event.clientY);
+//   let paragraph = document.createElement("p");
+//   let text = document.createTextNode("200");
+//   paragraph.appendChild(text);
+//   paragraph.style.position = "absolute";
+//   paragraph.style.left = event.clientX - 10 + "px";
+//   paragraph.style.top = event.clientY - 20 + "px";
+//   paragraph.style.margin = 0;
+//   document.body.appendChild(paragraph);
+// })
 
 preventClickSpam();
 displayCoins();
