@@ -63,15 +63,10 @@ const ironBall = new Currency("currency-item", 1, false, "images/iron-ball.png",
 const lightClay = new Currency("currency-item", 2, false, "images/light-clay.png", 30);
 const ovalStone = new Currency("currency-item", 1, false, "images/oval-stone.png", 30);
 
-const relicCopper = new Currency("currency-item", 2, false, "images/relic-copper.png", 20);
-const relicSilver = new Currency("currency-item", 1, false, "images/relic-silver.png", 5);
-const relicGold = new Currency("currency-item", 1, false, "images/relic-gold.png", 5);
-const darkStone = new Currency("currency-item", 1, false, "images/dark-stone.png", 5);
-const lightStone = new Currency("currency-item", 2, false, "images/light-stone.png", 30);
-
-
 // creating array of these currency objects //
-const currencyArr = [bigNugget, bigPearl, nugget, starPiece, pearl, blueShard, greenShard, yellowShard, redShard, moonStone, leafStone, fireStone, thunderStone, waterStone, sunStone, rareCandy, starDust, duskStone, shinyStone, dawnStone, deepSeaScale, dragonScale, everStone, eviolite, floatStone, hardStone, ironBall, lightClay, ovalStone, prismScale];
+// const currencyArr = [bigNugget, bigPearl, nugget, starPiece, pearl, blueShard, greenShard, yellowShard, redShard, moonStone, leafStone, fireStone, thunderStone, waterStone, sunStone, rareCandy, starDust, duskStone, shinyStone, dawnStone, deepSeaScale, dragonScale, everStone, eviolite, floatStone, hardStone, ironBall, lightClay, ovalStone, prismScale];
+
+const currencyArr = [redShard, yellowShard, blueShard, greenShard, waterStone, ironBall, hardStone, everStone, fireStone];
 
 // randomly orders the array //
 const shuffleArray = function(arr) {
@@ -147,16 +142,17 @@ const selectCurrencyItems = function(arr) {
 }
 
 // displays the value with a text pop up when an item is clicked on //
-const displayItemValue = function(event, itemValue) {
+const displayItemValue = function(itemValue) {
   let paragraph = document.createElement("p");
   paragraph.setAttribute("id", "pop-up-value-text")
   let text = document.createTextNode(`+${itemValue}`);
   paragraph.appendChild(text);
   paragraph.style.position = "absolute";
-  paragraph.style.left = event.clientX - 20 + "px";
-  paragraph.style.top = event.clientY - 45 + "px";
+  paragraph.style.left = 415 + "px";
+  paragraph.style.top =  170 + "px";
   paragraph.style.margin = 0;
   paragraph.style.color = "green";
+  paragraph.style.fontSize = "25px";
   document.body.appendChild(paragraph);
 }
 
@@ -170,11 +166,11 @@ const createImg = function(arrItem) {
   renderItem.classList.add(arrItem.commonClass);
   renderItem.src = arrItem.source;
   document.querySelector(".currency-grid").appendChild(renderItem);
-  renderItem.addEventListener("click", function(event) {
+  renderItem.addEventListener("click", function() {
     clickSound();
     preventClickSpam();
-    displayItemValue(event, arrItem.value);
-    setTimeout(removeItemValuePopUp, 400);
+    displayItemValue(arrItem.value);
+    setTimeout(removeItemValuePopUp, 700);
     coins =  Number(localStorage.getItem("coins"));
     coins += arrItem.value;
     localStorage.setItem("coins", coins);
