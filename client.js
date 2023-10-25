@@ -82,6 +82,7 @@ const displayCoins = function() {
   document.getElementById("player-coins").innerHTML = numberFormatter.format(coins);
 }
 
+// selects which items will appear, limits to 9 //
 const selectCurrencyItems = function(arr) {
   let total = 0;
   for (i = 0; i <= arr.length - 1; i++) {
@@ -198,15 +199,6 @@ const resetCurrencyObject = function(arr) {
   });
 }
 
-// allows you to click on items in the currency grid by removing a class //
-// THIS FUNCTION IS NO LONGER NEEDED //
-const allowClick = function() {
-  const allowOn = document.querySelectorAll(".currency-item");
-  allowOn.forEach(function(item) {
-    item.classList.remove("disable-click"); 
-  }) 
-}
-
 // prevents the player from spam clicking as many items as they can //
 const preventClickSpam = function() {
   const preventOn = document.querySelectorAll(".currency-item");
@@ -247,21 +239,6 @@ const spawnItems = function() {
   resetCurrencyObject(currencyArr);
   setTimeout(deleteCurrencyItem, 1500);
 }
-
-
-//**************** All of this has been put in the event listener on the images in the create image function */
-// document.querySelector(".left-side").addEventListener("click", function(event) {
-//   console.log(event.clientX, event.clientY);
-//   let paragraph = document.createElement("p");
-//   let text = document.createTextNode("200");
-//   paragraph.appendChild(text);
-//   paragraph.style.position = "absolute";
-//   paragraph.style.left = event.clientX - 10 + "px";
-//   paragraph.style.top = event.clientY - 20 + "px";
-//   paragraph.style.margin = 0;
-//   document.body.appendChild(paragraph);
-// })
-
 
 displayCoins();
 setInterval(spawnItems, randomRange(3000, 10000));
