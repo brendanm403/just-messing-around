@@ -47,26 +47,24 @@ const waterStone = new Currency("currency-item", 3, false, "images/water-stone.p
 const leafStone = new Currency("currency-item", 3, false, "images/leaf-stone.png", 200);
 const thunderStone = new Currency("currency-item", 3, false, "images/thunder-stone.png", 200);
 const fireStone = new Currency("currency-item", 3, false, "images/fire-stone.png", 200);
-const redShard = new Currency("currency-item", 2, false, "images/red-shard.png", 15);
-const yellowShard = new Currency("currency-item", 2, false, "images/yellow-shard.png", 15);
-const blueShard = new Currency("currency-item", 1, false, "images/blue-shard.png", 10);
-const greenShard = new Currency("currency-item", 1, false, "images/green-shard.png", 10);
+const redShard = new Currency("currency-item", 1, false, "images/red-shard.png", 5);
+const yellowShard = new Currency("currency-item", 1, false, "images/yellow-shard.png", 5);
+const blueShard = new Currency("currency-item", 1, false, "images/blue-shard.png", 5);
+const greenShard = new Currency("currency-item", 1, false, "images/green-shard.png", 5);
 
-const deepSeaScale = new Currency("currency-item", 3, false, "images/deep-sea-scale.png", 50);
-const dragonScale = new Currency("currency-item", 3, false, "images/dragon-scale.png", 50);
-const prismScale = new Currency("currency-item", 3, false, "images/prism-scale.png", 50);
+const deepSeaScale = new Currency("currency-item", 3, false, "images/deep-sea-scale.png", 200);
+const dragonScale = new Currency("currency-item", 3, false, "images/dragon-scale.png", 200);
+const prismScale = new Currency("currency-item", 3, false, "images/prism-scale.png", 200);
 const everStone = new Currency("currency-item", 1, false, "images/everstone.png", 5);
 const eviolite = new Currency("currency-item", 2, false, "images/eviolite.png", 20);
 const floatStone = new Currency("currency-item", 1, false, "images/float-stone.png", 5);
 const hardStone = new Currency("currency-item", 1, false, "images/hard-stone.png", 5);
 const ironBall = new Currency("currency-item", 1, false, "images/iron-ball.png", 5);
-const lightClay = new Currency("currency-item", 2, false, "images/light-clay.png", 30);
-const ovalStone = new Currency("currency-item", 1, false, "images/oval-stone.png", 30);
+const lightClay = new Currency("currency-item", 2, false, "images/light-clay.png", 20);
+const ovalStone = new Currency("currency-item", 1, false, "images/oval-stone.png", 5);
 
 // creating array of these currency objects //
-// const currencyArr = [bigNugget, bigPearl, nugget, starPiece, pearl, blueShard, greenShard, yellowShard, redShard, moonStone, leafStone, fireStone, thunderStone, waterStone, sunStone, rareCandy, starDust, duskStone, shinyStone, dawnStone, deepSeaScale, dragonScale, everStone, eviolite, floatStone, hardStone, ironBall, lightClay, ovalStone, prismScale];
-
-const currencyArr = [redShard, yellowShard, blueShard, greenShard, waterStone, ironBall, hardStone, everStone, fireStone];
+const currencyArr = [bigNugget, bigPearl, nugget, starPiece, pearl, blueShard, greenShard, yellowShard, redShard, moonStone, leafStone, fireStone, thunderStone, waterStone, sunStone, rareCandy, starDust, duskStone, shinyStone, dawnStone, deepSeaScale, dragonScale, everStone, eviolite, floatStone, hardStone, ironBall, lightClay, ovalStone, prismScale];
 
 // randomly orders the array //
 const shuffleArray = function(arr) {
@@ -84,61 +82,73 @@ const displayCoins = function() {
   document.getElementById("player-coins").innerHTML = numberFormatter.format(coins);
 }
 
-// selects if an item will stock based on rarity //
 const selectCurrencyItems = function(arr) {
-  arr.forEach(function(item) {
-    if (item.rarity === 10) {
-      let randNum = Math.ceil(Math.random()*100);
-      if (randNum === 1) {
-        item.selected = true;
-      } 
-    } else if (item.rarity === 9) {
-      let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 2) {
-        item.selected = true;
-      } 
-    } else if (item.rarity === 8) {
-      let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 3) {
-        item.selected = true;
-      } 
-    } else if (item.rarity === 7) {
-      let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 4) {
-        item.selected = true;
+  let total = 0;
+  for (i = 0; i <= arr.length - 1; i++) {
+    if (total < 9) {
+      if (arr[i].rarity === 10) {
+        let randNum = Math.ceil(Math.random()*300);
+        if (randNum === 1) {
+          arr[i].selected = true;
+          total++;
+        } 
+      } else if (arr[i].rarity === 9) {
+        let randNum = Math.ceil(Math.random()*280);
+        if (randNum <= 2) {
+          arr[i].selected = true;
+          total++;
+        } 
+      } else if (arr[i].rarity === 8) {
+        let randNum = Math.ceil(Math.random()*260);
+        if (randNum <= 3) {
+          arr[i].selected = true;
+          total++;
+        } 
+      } else if (arr[i].rarity === 7) {
+        let randNum = Math.ceil(Math.random()*240);
+        if (randNum <= 4) {
+          arr[i].selected = true;
+          total++;
+        } 
+      } else if (arr[i].rarity === 6) {
+        let randNum = Math.ceil(Math.random()*220);
+        if (randNum <= 5) {
+          arr[i].selected = true;
+          total++;
+        } 
+      } else if (arr[i].rarity === 5) {
+        let randNum = Math.ceil(Math.random()*200);
+        if (randNum <= 6) {
+          arr[i].selected = true;
+          total++;
+        } 
+      } else if (arr[i].rarity === 4) {
+        let randNum = Math.ceil(Math.random()*180);
+        if (randNum <= 7) {
+          arr[i].selected = true;
+          total++;
+        } 
+      } else if (arr[i].rarity === 3) {
+        let randNum = Math.ceil(Math.random()*160);
+        if (randNum <= 8) {
+          arr[i].selected = true;
+          total++;
+        } 
+      } else if (arr[i].rarity === 2) {
+        let randNum = Math.ceil(Math.random()*140);
+        if (randNum <= 10) {
+          arr[i].selected = true;
+          total++;
+        } 
+      } else if (arr[i].rarity === 1) {
+        let randNum = Math.ceil(Math.random()*100);
+        if (randNum <= 90) {
+          arr[i].selected = true;
+          total++;
+        } 
       }
-    } else if (item.rarity === 6) {
-      let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 5) {
-        item.selected = true;
-      }
-    } else if (item.rarity === 5) {
-      let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 6) {
-        item.selected = true;
-      }
-    } else if (item.rarity === 4) {
-      let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 7) {
-        item.selected = true;
-      }
-    } else if (item.rarity === 3) {
-      let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 8) {
-        item.selected = true;
-      }
-    } else if (item.rarity === 2) {
-      let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 80) {
-        item.selected = true;
-      }
-    } else if (item.rarity === 1) {
-      let randNum = Math.ceil(Math.random()*100);
-      if (randNum <= 90) {
-        item.selected = true;
-      }
-    }
-  });
+    }    
+  }
 }
 
 // displays the value with a text pop up when an item is clicked on //
@@ -235,7 +245,7 @@ const spawnItems = function() {
   selectCurrencyItems(currencyArr);
   createCurrencyItem(currencyArr);
   resetCurrencyObject(currencyArr);
-  setTimeout(deleteCurrencyItem, 2000);
+  setTimeout(deleteCurrencyItem, 1500);
 }
 
 
