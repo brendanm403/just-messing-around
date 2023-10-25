@@ -67,7 +67,42 @@ const ovalStone = new Currency("currency-item", 1, false, "images/oval-stone.png
 const currencyArr = [bigNugget, bigPearl, nugget, starPiece, pearl, blueShard, greenShard, yellowShard, redShard, moonStone, leafStone, fireStone, thunderStone, waterStone, sunStone, rareCandy, starDust, duskStone, shinyStone, dawnStone, deepSeaScale, dragonScale, everStone, eviolite, floatStone, hardStone, ironBall, lightClay, ovalStone, prismScale];
 
 
-// //
+// get access to the values of all items on the screen
+// store values in an array or object
+const getValues = function(arr) {
+  let valuesArr = [];
+  arr.forEach(function(item) {
+    if(item.selected === true) {
+      let value = item.value;
+      valuesArr.push(value);
+    }
+  });
+  return valuesArr;
+}
+
+
+// compare the value of the item clicked to all other values
+// make a variable thats aboolean, push all results into new array
+// then loop through that array and make sure every value is true
+const compareValues = function(event, arr) {
+  let value = Number(event.target.classList[1].substring(1));  
+  console.log(value);
+  
+  for (let i = 0; i <= arr.length - 1; i++) {
+    if (arr[i].selected === true) {
+      if(value >= arr[i]) {
+        
+      }
+    }
+  }
+}
+
+// if it is higher than all other values or it shares the highest value with other items add coins
+// remove item
+// if it is not the highest value do not add coins or remove item
+// text pop up indicating you were wrong
+
+ 
 
 
 // randomly orders the array //
@@ -178,11 +213,12 @@ const removeItemValuePopUp = function() {
 // creates an image element, sets attributes, renders on screen, adds event listener //
 const createImg = function(arrItem) {
   let renderItem = document.createElement("img");
-  renderItem.classList.add(arrItem.commonClass);
+  renderItem.classList.add(arrItem.commonClass, `v${arrItem.value}`);
   renderItem.src = arrItem.source;
   document.querySelector(".currency-grid").appendChild(renderItem);
-  renderItem.addEventListener("click", function() {
+  renderItem.addEventListener("click", function(event) {
     clickSound();
+    compareValues(event);
     preventClickSpam();
     displayItemValue(arrItem.value);
     setTimeout(removeItemValuePopUp, 700);
@@ -239,6 +275,7 @@ const deleteCurrencyItem = function() {
 const spawnItems = function() {
   shuffleArray(currencyArr);
   selectCurrencyItems(currencyArr);
+  console.log(getValues(currencyArr));
   createCurrencyItem(currencyArr);
   resetCurrencyObject(currencyArr);
   setTimeout(deleteCurrencyItem, 1500);
