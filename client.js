@@ -66,6 +66,10 @@ const ovalStone = new Currency("currency-item", 1, false, "images/oval-stone.png
 // creating array of these currency objects //
 const currencyArr = [bigNugget, bigPearl, nugget, starPiece, pearl, blueShard, greenShard, yellowShard, redShard, moonStone, leafStone, fireStone, thunderStone, waterStone, sunStone, rareCandy, starDust, duskStone, shinyStone, dawnStone, deepSeaScale, dragonScale, everStone, eviolite, floatStone, hardStone, ironBall, lightClay, ovalStone, prismScale];
 
+
+// //
+
+
 // randomly orders the array //
 const shuffleArray = function(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
