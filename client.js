@@ -5,6 +5,7 @@ if (!localStorage.getItem("coins")) {
 };
 
 let coins = localStorage.getItem("coins");
+let currentHighestValue = 0;
 
 
 // plays a sound when currency item is clicked //
@@ -13,6 +14,13 @@ const clickSound = function() {
   audio.src = "coin-sounds/5_coins.ogg";
   audio.playbackRate = 2;
   audio.play();
+}
+
+const errorSound = function() {
+  const audio = new Audio;
+  audio.src = "coin-sounds/error.ogg";
+  audio.playbackRate = 2;
+  audio.play();  
 }
 
 // function that picks a random number in the specified range //
@@ -69,31 +77,34 @@ const currencyArr = [bigNugget, bigPearl, nugget, starPiece, pearl, blueShard, g
 
 // get access to the values of all items on the screen
 // store values in an array or object
-const getValues = function(arr) {
+const getHighestValue = function(arr) {
   let valuesArr = [];
+  currentHighestValue = 0;
   arr.forEach(function(item) {
     if(item.selected === true) {
       let value = item.value;
       valuesArr.push(value);
+      if (value > currentHighestValue) {
+        currentHighestValue = value;
+        // console.log('CHV', currentHighestValue);
+      }
     }
   });
-  return valuesArr;
+  // return valuesArr;
+  console.log(currentHighestValue);
 }
 
 
 // compare the value of the item clicked to all other values
 // make a variable thats aboolean, push all results into new array
 // then loop through that array and make sure every value is true
-const compareValues = function(event, arr) {
+const compareValues = function(event) {
   let value = Number(event.target.classList[1].substring(1));  
   console.log(value);
-  
-  for (let i = 0; i <= arr.length - 1; i++) {
-    if (arr[i].selected === true) {
-      if(value >= arr[i]) {
-        
-      }
-    }
+  if (value >= currentHighestValue) {
+    return true
+  } else {
+    return false
   }
 }
 
@@ -192,7 +203,7 @@ const selectCurrencyItems = function(arr) {
 }
 
 // displays the value with a text pop up when an item is clicked on //
-const displayItemValue = function(itemValue) {
+const displayItemValuePopUp = function(itemValue) {
   let paragraph = document.createElement("p");
   paragraph.setAttribute("id", "pop-up-value-text")
   let text = document.createTextNode(`+${itemValue}`);
@@ -210,6 +221,26 @@ const removeItemValuePopUp = function() {
   document.getElementById("pop-up-value-text").remove();
 }
 
+const displayWrongChoicePopUp = function() {
+  let paragraph = document.createElement("p");
+  paragraph.setAttribute("id", "pop-up-value-text")
+  let text = document.createTextNode("X");
+  paragraph.appendChild(text);
+  paragraph.style.position = "absolute";
+  paragraph.style.left = 415 + "px";
+  paragraph.style.top =  170 + "px";
+  paragraph.style.margin = 0;
+  paragraph.style.color = "red";
+  paragraph.style.fontSize = "25px";
+  document.body.appendChild(paragraph);  
+}
+
+const increaseCoins = function(arrItem) {
+  coins =  Number(localStorage.getItem("coins"));
+      coins += arrItem.value;
+      localStorage.setItem("coins", coins);  
+}
+
 // creates an image element, sets attributes, renders on screen, adds event listener //
 const createImg = function(arrItem) {
   let renderItem = document.createElement("img");
@@ -217,16 +248,20 @@ const createImg = function(arrItem) {
   renderItem.src = arrItem.source;
   document.querySelector(".currency-grid").appendChild(renderItem);
   renderItem.addEventListener("click", function(event) {
-    clickSound();
-    compareValues(event);
     preventClickSpam();
-    displayItemValue(arrItem.value);
-    setTimeout(removeItemValuePopUp, 700);
-    coins =  Number(localStorage.getItem("coins"));
-    coins += arrItem.value;
-    localStorage.setItem("coins", coins);
-    displayCoins();
-    renderItem.remove();
+    if (compareValues(event) === true) {
+      clickSound();
+      displayItemValuePopUp(arrItem.value);
+      setTimeout(removeItemValuePopUp, 700);
+      increaseCoins(arrItem);
+      displayCoins();
+      renderItem.remove();
+    } else {
+      errorSound();
+      displayWrongChoicePopUp();
+      setTimeout(removeItemValuePopUp, 700);
+    }
+    
   });
 }
 
@@ -245,7 +280,6 @@ const preventClickSpam = function() {
   preventOn.forEach(function(item) {
     item.classList.add("disable-click");
   });
-  // setTimeout(allowClick, 2100);
 }
 
 // creates the currency items that were selected by looping through the array //
@@ -254,10 +288,6 @@ const createCurrencyItem = function(arr) {
     if (arrItem.selected === true) {
       createImg(arrItem);
     } 
-    // can use this code to spawn multiple of an item //
-    // if (arrItem.rarity <= 2) {
-    //   createImg(arrItem);
-    // } 
   }); 
 }
 
@@ -275,11 +305,11 @@ const deleteCurrencyItem = function() {
 const spawnItems = function() {
   shuffleArray(currencyArr);
   selectCurrencyItems(currencyArr);
-  console.log(getValues(currencyArr));
+  getHighestValue(currencyArr);
   createCurrencyItem(currencyArr);
   resetCurrencyObject(currencyArr);
   setTimeout(deleteCurrencyItem, 1500);
 }
 
 displayCoins();
-setInterval(spawnItems, randomRange(3000, 10000));
+setInterval(spawnItems, randomRange(5000, 10000));

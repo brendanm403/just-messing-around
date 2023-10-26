@@ -59,6 +59,46 @@ h2 {
   margin-bottom: 0;
 }
 
+.v5 {
+  width: 80px;
+}
+
+.v20 {
+  width: 80px;
+}
+
+.v200 {
+  width: 80px;
+}
+
+.v300 {
+  width: 80px;
+}
+
+.v400 {
+  width: 80px;
+}
+
+.v700 {
+  width: 80px;
+}
+
+.v1000 {
+  width: 80px;
+}
+
+.v5000 {
+  width: 80px;
+}
+
+.v8000 {
+  width: 80px;
+}
+
+.v10000 {
+  width: 80px;
+}
+
 /* .currency-grid {
   display: grid;
   grid-column-gap: 30px;
