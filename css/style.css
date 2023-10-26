@@ -5,14 +5,31 @@ body {
   font-size: 10px;
 }
 
+ul {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  gap: 1.5rem;
+}
+
+header {
+  display: flex;
+  background-color: black;
+  color: white;
+  justify-content: center;
+  min-height: 4rem;
+  font-size: 25px;
+}
+
 h4 {
-text-align: center;
-margin: 1.5rem auto 0 auto;
-background-color: black;
-border-radius: 1rem;
-width: fit-content;
-color: white;
-padding: .5rem;
+  text-align: center;
+  margin: 1.5rem auto 0 auto;
+  background-color: black;
+  border-radius: 1rem;
+  width: fit-content;
+  color: white;
+  padding: .5rem;
 }
 
 .nugget {
@@ -108,6 +125,24 @@ h2 {
   justify-content: center;
   justify-items: center;
 } */
+
+/* sticky footer code */
+html, body {
+  height: 100%;
+}
+/* sticky footer code */
+body {
+  display: flex;
+  flex-direction: column;
+}
+/* sticky footer code */
+.content {
+  flex: 1 0 auto;
+}
+/* sticky footer code */
+.footer {
+  flex-shrink: 0;
+}
 
 
 /* ASSIGNMENT 1 ADD INS another css toggle (can be darkmode), user input field (enter name, render it on screen, difficulty mode?), header, footer, instructions for the game in its current state*/
